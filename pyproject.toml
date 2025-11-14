@@ -1,0 +1,19 @@
+[project]
+name = "nomadcoder-airbnb-assignment"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "dolidoli92",email = "dolidoli92@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "django-admin (>=2.0.2,<3.0.0)",
+    "django-restframework (>=0.0.1,<0.0.2)",
+    "pillow (>=12.0.0,<13.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
