@@ -1,0 +1,5 @@
+<ul>
+  {% for tweet in tweets %}
+    <li>{{ tweet.payload }} - {{ tweet.user }} 이 작성함!</li>
+  {% endfor %}
+</ul>

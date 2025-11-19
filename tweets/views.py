@@ -1,15 +1,26 @@
+from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import TweetSerializer
 from .models import Tweet
 
 
-class TweetListView(APIView):
-    def get(self, request):
-        tweets = Tweet.objects.all().order_by("-created_at")
-        serializer = TweetSerializer(tweets, many=True)
+# 251119_assignment
+def TweetListView(request):
+    all_tweets = Tweet.objects.all()
 
-        return Response(serializer.data)
+    context = {
+        "tweets": all_tweets,
+    }
+    return render(request, "251119_assignment.html", context)
+
+
+# class TweetListView(APIView):
+#     def get(self, request):
+#         tweets = Tweet.objects.all().order_by("-created_at")
+#         serializer = TweetSerializer(tweets, many=True)
+
+#         return Response(serializer.data)
 
 
 class TweetDetailView(APIView):
