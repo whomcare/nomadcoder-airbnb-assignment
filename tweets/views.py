@@ -6,21 +6,21 @@ from .models import Tweet
 
 
 # 251119_assignment
-def TweetListView(request):
-    all_tweets = Tweet.objects.all()
+# def TweetListView(request):
+#     all_tweets = Tweet.objects.all()
 
-    context = {
-        "tweets": all_tweets,
-    }
-    return render(request, "251119_assignment.html", context)
+#     context = {
+#         "tweets": all_tweets,
+#     }
+#     return render(request, "251119_assignment.html", context)
 
 
-# class TweetListView(APIView):
-#     def get(self, request):
-#         tweets = Tweet.objects.all().order_by("-created_at")
-#         serializer = TweetSerializer(tweets, many=True)
+class TweetListView(APIView):
+    def get(self, request):
+        tweets = Tweet.objects.all().order_by("-created_at")
+        serializer = TweetSerializer(tweets, many=True)
 
-#         return Response(serializer.data)
+        return Response(serializer.data)
 
 
 class TweetDetailView(APIView):
