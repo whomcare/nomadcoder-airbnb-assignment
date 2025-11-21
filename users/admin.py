@@ -9,3 +9,8 @@ class CustomUserAdmin(admin.ModelAdmin):
         "username",
         "gender",
     )
+    search_fields = ("username",)
+    list_filter = (
+        "gender",
+        "country",
+    )

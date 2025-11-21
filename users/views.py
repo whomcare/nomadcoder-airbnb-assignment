@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from .models import CustomUser
 from rest_framework.response import Response
-from .serializers import TinyUserSerializer
+from .serializers import TinyUserSerializer, UserDetailSerializer
 from tweets.serializers import TweetSerializer
 from .models import CustomUser
 
@@ -23,7 +23,7 @@ class UserDetailViews(APIView):
 
     def get(self, request, pk):
         user = self.get_object(pk)
-        serializer = TinyUserSerializer(user)
+        serializer = UserDetailSerializer(user)
         return Response(serializer.data)
 
 

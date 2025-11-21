@@ -8,5 +8,19 @@ class TinyUserSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "username",
+            "avatar",
+        ]
+
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = [
+            "id",
+            "username",
+            "country",
             "gender",
+            "bio",
+            "birth_date",
+            "avatar",
         ]
