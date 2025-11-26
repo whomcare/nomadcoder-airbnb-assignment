@@ -3,6 +3,11 @@ from common.models import Common
 from users.models import CustomUser
 
 
+class LikeType(models.TextChoices):
+    TWEET = ["Tweet", "tweet"]
+    COMMENT = ["Comment", "comment"]
+
+
 # The tweets app should have the models: Tweet and Like.
 class Tweet(Common):
     payload = models.TextField(max_length=180)
@@ -11,6 +16,26 @@ class Tweet(Common):
         on_delete=models.CASCADE,
         null=False,
         related_name="tweets",
+    )
+
+    def __str__(self):
+        return self.payload
+
+
+class Comment(Common):
+    payload = models.TextField(max_length=200)
+    user = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        null=False,
+        related_name="comments",
+    )
+
+    tweet = models.ForeignKey(
+        Tweet,
+        on_delete=models.CASCADE,
+        null=False,
+        related_name="comments",
     )
 
     def __str__(self):
@@ -27,9 +52,25 @@ class Like(Common):
     tweet = models.ForeignKey(
         Tweet,
         on_delete=models.CASCADE,
-        null=False,
+        null=True,
         related_name="likes",
+    )
+    comment = models.ForeignKey(
+        Comment,
+        on_delete=models.CASCADE,
+        null=True,
+        related_name="likes",
+    )
+    like_type = models.CharField(
+        max_length=20,
+        null=False,
+        blank=True,
+        choices=LikeType.choices,
+        default=LikeType.TWEET,
     )
 
     def __str__(self):
-        return f"{self.user} likes {self.tweet}"
+        if self.like_type == LikeType.COMMENT:
+            return f"{self.user} likes {self.comment}"
+        else:
+            return f"{self.user} likes {self.tweet}"
